@@ -18,3 +18,13 @@
     outline: none;
     cursor: text;
   }
+.nav{
+    background-color:#FE5B00;
+    padding:10px;
+    position:fixed;
+}
+.brand{
+    display:flex;
+    padding:5px;
+    margin:0;
+}
