@@ -1,12 +1,23 @@
 import React from "react";
 import "./adminDashboard.css";
+import Side from "../../components/side/Side";
+import Navbars from "../../components/NavBar/Navbar";
+
 
 const AdminDashboard = () => {
   return (
     <div className="adminPage">
-      <h1 style={{ color: "red" }}>sss</h1>
-      <h1 style={{ color: "green" }}>sss</h1>
-      <h1 style={{ color: "green" }}>sss</h1>
+      <Navbars />
+      <div style={{ display: "flex",}}>
+        <Side />
+        <div style={{marginLeft:"230px",marginTop:"60px"}}>
+          <h1>fsafs</h1>
+          <h1>fsafs</h1>
+          <h1>fsafs</h1>
+          <h1>fsafs</h1>
+          <h1>fsafs</h1>
+        </div>
+      </div>
     </div>
   );
 };

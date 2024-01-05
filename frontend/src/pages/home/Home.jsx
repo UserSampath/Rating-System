@@ -6,7 +6,9 @@ import "./home.css";
 const Home = () => {
   return (
     <>
-      
+      <h1>wfweff</h1>
+      <h1>wfweff</h1>
+      <h1>wfweff</h1>
     </>
   );
 };

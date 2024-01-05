@@ -4,7 +4,7 @@ import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signUp/SignUp";
 import Home from "./pages/home/Home";
 import Rating from "./pages/Rating/Rating";
-import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 
 function App() {
   return (
