@@ -12,8 +12,9 @@
 
   --primary: #FFA360;
   --color2: #fe5b00;
-  --color3: #151a4e;
+  --color3: #ffffff;
   --buttonColor: #1f9ad6;
+
 
   /* ===Fonts and Typography===*/
   --body-font: "Open Sans", sans-serif;
@@ -34,6 +35,8 @@
   --weight-600: 600;
   --weight-700: 700;
   --weight-800: 800;
+
+  --title-color: #0cb000;
 }
 
 * {
@@ -58,9 +61,13 @@ body {
 }
 
 h1,
-h2,
 h3,
 h4 {
+  color: black;
+  font-family: var(--body-font);
+  font-weight: var(--weight-700);
+}
+h2{
   color: var(--title-color);
   font-family: var(--body-font);
   font-weight: var(--weight-700);

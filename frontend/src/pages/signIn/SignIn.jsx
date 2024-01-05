@@ -24,7 +24,7 @@ const SignIn = () => {
             />
 
             <div className="buttonsContainer">
-              <div className="forgotPassword">Forgot Password</div>
+              
               <Button type={"1"} text="Sign In" />
             </div>
             <div className="newHereContainer">
@@ -43,8 +43,8 @@ const SignIn = () => {
         <div className="imageBox">
           <div>
             <div className="imgContainerText">
-              <h2>Welcome to</h2>
-              <h1>APPE System</h1>
+              <h2 className="whiteH2">Welcome to</h2>
+              <h1>Lenzz Rating System</h1>
               <p>Log in to access your account. </p>
             </div>
             <img className="signInImage" src="../../image/pic1.png" alt="" />
