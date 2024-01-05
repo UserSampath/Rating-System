@@ -52,8 +52,32 @@ const signupUser = async (req, res) => {
     }
 };
 
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        if (!email || !password) {
+            throw Error("Email and password are required");
+        }
+
+        const user = await userModel.findOne({ email: email });
+        if (!user) {
+            throw Error("Invalid email or password");
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, user.password);
+        if (!isPasswordValid) {
+            throw Error("Invalid email or password");
+        }
+
+        const token = createToken(user._id);
+        res.status(200).json({ token });
+    } catch (error) {
+        res.status(401).json({ error: error.message });
+    }
+};
 
 
 module.exports = {
     signupUser,
+    loginUser
 }

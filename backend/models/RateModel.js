@@ -23,6 +23,10 @@ const RateUserSchema = new Schema(
         Rate: {
             type: Number,
             
+        },
+        Image :{
+            type: String,
+            required: true,
         }
     }
 )
