@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoute");
+const RateUserRoutes = require("./routes/RateUser");
 require('dotenv').config();
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,6 +19,8 @@ app.use(express.json());
 mongoose.set("strictQuery", true);
 
 app.use("/api/user", userRoutes);
+app.use("/api/rate", RateUserRoutes);
+
 
 
 

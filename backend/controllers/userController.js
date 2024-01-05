@@ -4,8 +4,6 @@ const validator = require("validator");
 const bcrypt = require("bcrypt");
 
 
-
-
 const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: 259200 });
 };
@@ -53,6 +51,8 @@ const signupUser = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+
 
 module.exports = {
     signupUser,
