@@ -1,0 +1,20 @@
+.imageDiv{
+    display :flex ;
+    align-items:center;
+    padding:5px;
+}
+.Logo{
+    width:85px;
+    padding:10px
+}
+
+.input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    outline: none;
+    cursor: text;
+  }
