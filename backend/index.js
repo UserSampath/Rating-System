@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
+const userRoutes = require("./routes/userRoute");
 require('dotenv').config();
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -15,6 +16,9 @@ app.use(
 );
 app.use(express.json());
 mongoose.set("strictQuery", true);
+
+app.use("/api/user", userRoutes);
+
 
 
 mongoose.connect(process.env.MONGO_URI)
