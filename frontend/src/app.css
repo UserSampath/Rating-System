@@ -39,6 +39,7 @@
   --title-color: #0cb000;
 }
 
+
 * {
   margin: 0;
   padding: 0;
@@ -57,7 +58,7 @@ textarea {
 
 body {
   background-color: var(--primary);
-  color: white;
+  color: black;
 }
 
 h1,
