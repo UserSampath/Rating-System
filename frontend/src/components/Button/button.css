@@ -1,9 +1,8 @@
 .button-1 {
   color: white;
   height: 40px;
-  border: 1px solid black;
   padding: 8px 12px;
-  background-color: var(--buttonColor);
+  background-color: var(--title-color);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -14,9 +13,8 @@
 .button-2 {
   color: rgb(255, 255, 255);
   height: 40px;
-  border: 1px solid black;
   padding: 8px 12px;
-  background-color: var(--primary);
+  background-color:black;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -27,13 +25,13 @@
 }
 
 .button-1:hover {
-  background-color: white;
-  color: var(--primary);
+  background-color: #fe5b00;
+  color: white;
   cursor: pointer;
 }
 
 .button-2:hover{
-  background-color: white;
-  color: var(--primary);
+  background-color: #fe5b00;
+  color: white;
   cursor: pointer;
 }

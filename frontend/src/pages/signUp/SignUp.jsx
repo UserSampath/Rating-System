@@ -19,8 +19,8 @@ const SignUp = () => {
             <TextInput
               type={"password"}
               icon={"profile"}
-              inputName={"Second Name"}
-              placeholder={"Enter Second Name"}
+              inputName={"Last Name"}
+              placeholder={"Enter Last Name"}
             />
             <TextInput
               type={"email"}
@@ -55,8 +55,8 @@ const SignUp = () => {
         <div className="imageBox">
           <div>
             <div className="imgContainerText">
-              <h2>Welcome to</h2>
-              <h1>APPE System</h1>
+              <h2 className="whiteH2">Welcome to</h2>
+              <h1>Lenzz Rating System</h1>
               <p>Register to create your account </p>
             </div>
             <img className="signInImage" src="../../image/pic1.png" alt="" />
