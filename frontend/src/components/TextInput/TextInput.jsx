@@ -3,11 +3,33 @@ import "./textInput.css";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsPerson } from "react-icons/bs";
 import { FiLock } from "react-icons/fi";
-const TextInput = ({ icon, inputName, placeholder, type }) => {
+const TextInput = ({ icon, inputName, placeholder, type, errorMessage }) => {
+  
+  const getErrorClass = () => {
+   if (errorMessage == undefined) {
+     return "inputLine";
+   } else if (errorMessage == "") {
+     return "inputLine";
+   } else {
+     return "inputLineError";
+   }
+}
+
   return (
     <div className="inputComponent">
+      <div
+        className={
+          errorMessage && errorMessage != ""
+            ? "errorMessageShow"
+            : "errorMessageHide"
+        }>
+        {errorMessage&& errorMessage}
+      </div>
       <p className="inputName">{inputName}</p>
-      <div className="inputLine">
+
+      <div
+        className={getErrorClass()}
+      >
         {icon === "mail" && <HiOutlineMail className="icon" />}
         {icon === "profile" && <BsPerson className="icon" />}
         {icon === "lock" && <FiLock className="icon" />}

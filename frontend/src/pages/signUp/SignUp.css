@@ -43,6 +43,7 @@ cursor: pointer;
 
 .boxContainer{
   display: flex;
+  
 }
 
 .imageBox{
@@ -69,4 +70,10 @@ cursor: pointer;
 .newHereButton2{
   margin-left: 100px;
   margin-top: 5px;
+}
+
+.signUpPage{
+  height: 100vh;
+  width: 100%;
+  background-color: var(--primary);
 }
