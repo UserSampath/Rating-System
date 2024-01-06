@@ -3,33 +3,33 @@ const RateuserModel = require("../models/RateModel");
 
 
 const RateUserAdd = async (req, res) => {
-    const { firstName, lastName, Job, Description,  } = req.body;
-  
+    const { firstName, lastName, Job, Description, } = req.body;
+
     try {
-      const imageBuffer = req.file.buffer; 
-      const imageBase64 = imageBuffer.toString('base64');
-  
-      const Rateuser = new RateuserModel({
-        firstName,
-        lastName,
-        Job,
-        Description,
-        Image: imageBase64,
-      });
-  
-      await Rateuser.save();
-  
-      res.status(200).json({ message: 'User  submitted successfully!', Rateuser });
+        const imageBuffer = req.file.buffer;
+        const imageBase64 = imageBuffer.toString('base64');
+
+        const Rateuser = new RateuserModel({
+            firstName,
+            lastName,
+            Job,
+            Description,
+            Image: imageBase64,
+        });
+
+        await Rateuser.save();
+
+        res.status(200).json({ message: 'User  submitted successfully!', Rateuser });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error.message });
     }
-  };
-  
+};
+
 
 
 
 const DeleteRateUser = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.params.id;
 
     try {
         const deletedRateUser = await RateuserModel.findByIdAndDelete(userId);
@@ -50,7 +50,7 @@ const UpdateRateUser = async (req, res) => {
     try {
         const updatedRateUser = await RateuserModel.findByIdAndUpdate(
             userId,
-            { $push: { Rate: Rate } }, 
+            { $push: { Rate: Rate } },
             { new: true, runValidators: true }
         );
 
@@ -66,7 +66,7 @@ const UpdateRateUser = async (req, res) => {
 
 
 const GetRateUser = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.params.id;
     try {
         const rateUser = await RateuserModel.findById(userId);
 
@@ -80,10 +80,41 @@ const GetRateUser = async (req, res) => {
     }
 };
 
+// new
+const rateUser = async (req, res) => {
+    const { Rate, id } = req.body;
+
+    try {
+        const updatedRateUser = await RateuserModel.findByIdAndUpdate(
+            id,
+            { $push: { Rate: Rate } },
+            { new: true }
+            
+        );
+
+        if (!updatedRateUser) {
+            throw Error("User not found");
+        }
+
+        res.status(200).json({ message: "User updated successfully",Rate:updatedRateUser.Rate});
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+const getRateUsers = async (req, res) => {
+    try {
+        const rateUsers = await RateuserModel.find();
+        res.status(200).json(rateUsers);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
 module.exports = {
     RateUserAdd,
     DeleteRateUser,
     UpdateRateUser,
-    GetRateUser
+    GetRateUser,
+    rateUser,
+    getRateUsers
 }
