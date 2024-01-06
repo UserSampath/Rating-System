@@ -5,7 +5,7 @@ import Star from '../Star/Star';
 import "./Modal.css";
 
 const Modals = ({ data }) => {
-  const [userRating, setUserRating] = useState(0); // Initialize to a default value
+  const [userRating, setUserRating] = useState(0); 
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -22,8 +22,7 @@ const Modals = ({ data }) => {
   };
 
   const handleSubmit = () => {
-    // Handle submission logic (e.g., send the userRating to the server)
-    // For demonstration purposes, set a flag to show success message
+    
     setSubmitted(true);
   };
 
