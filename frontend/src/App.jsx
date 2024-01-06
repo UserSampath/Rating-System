@@ -4,7 +4,7 @@ import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signUp/SignUp";
 import Home from "./pages/home/Home";
 import Rating from "./pages/Rating/Rating";
-import AdminDashboard from "./pages/Dashboard/AdminDashboard";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 
 function App() {
   return (
@@ -15,8 +15,6 @@ function App() {
         <Route path="/register" element={<SignUp />}></Route>
         <Route path="/rating" element={<Rating />}></Route>
         <Route path="/admin" element={<AdminDashboard />}></Route>
-
-
       </Routes>
     </BrowserRouter>
   );

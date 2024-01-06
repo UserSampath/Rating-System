@@ -11,15 +11,15 @@
 }
 
 .input {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;
-  background: transparent;
-  color: rgb(0, 0, 0);
-  outline: none;
-font-size: medium;
-  cursor: text;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  border: none !important;
+  background: transparent !important;
+  color: rgb(0, 0, 0) !important;
+  outline: none !important;
+font-size: medium !important;
+  cursor: text !important;
 }
 
 .icon {
