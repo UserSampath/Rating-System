@@ -1,8 +1,19 @@
-import React from "react";
+import {useState} from "react";
 import Container from "react-bootstrap/esm/Container";
 import IconButton from "../IconButton/IconButton";
 import { FaStar } from "react-icons/fa";
+import EditUserModal from "../EditUserModal/EditUserModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 const UserDetails = () => {
+  const [show, setShow] = useState(false);
+  const [showDelete, setDeleteShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleDeleteClose = () => setDeleteShow(false);
+  const handleDeleteShow = () => setDeleteShow(true);
+
   return (
     <div>
       {" "}
@@ -44,10 +55,19 @@ const UserDetails = () => {
         </div>
 
         <div className="m-3 d-flex">
-          <IconButton text="Edit" buttonColor={"green"} />
-          <IconButton text="Delete" buttonColor={"red"} />
+          <button style={{background: "none",border: "none",padding: 0 ,margin: 0}} onClick={handleShow}>
+          <IconButton text="Edit" buttonColor={"green"}  />
+          </button>
+          <button style={{background: "none",border: "none",padding: 0 ,margin: 0}} onClick={handleDeleteShow}>
+            <IconButton text="Delete" buttonColor={"red"} />
+          </button>
+
         </div>
       </Container>
+      <EditUserModal show={show} handleClose={handleClose} />
+      <DeleteModal showDelete={showDelete} handleDeleteClose={handleDeleteClose} />
+
+      
     </div>
   );
 };

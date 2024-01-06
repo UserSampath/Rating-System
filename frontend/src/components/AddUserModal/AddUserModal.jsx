@@ -6,7 +6,6 @@ import Axios from 'axios';
 import { FaUser, FaBriefcase, FaFile, FaImage } from 'react-icons/fa';
 import 'sweetalert2/dist/sweetalert2.min.css'; 
 import Swal from 'sweetalert2'
-
 import "./AddUserModal.css";
 
 const AddUserModal = ({ handleClose, show }) => {

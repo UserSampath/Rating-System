@@ -20,15 +20,15 @@ const RateUserSchema = new Schema(
       required: true,
     },
     Rate: {
-      type: String,
+      type: [Number], 
     },
     Image: {
-      type: Buffer, // Change the type to Buffer for image storage
+      type: Buffer, 
       required: true,
     },
   },
   {
-    timestamps: true, // Optional: include timestamps
+    timestamps: true, 
   }
 );
 

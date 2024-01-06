@@ -6,9 +6,7 @@ const RateUserAdd = async (req, res) => {
     const { firstName, lastName, Job, Description,  } = req.body;
   
     try {
-     
-  
-      const imageBuffer = req.file.buffer; // Access image data from req.file
+      const imageBuffer = req.file.buffer; 
       const imageBase64 = imageBuffer.toString('base64');
   
       const Rateuser = new RateuserModel({
@@ -47,13 +45,12 @@ const DeleteRateUser = async (req, res) => {
 };
 
 const UpdateRateUser = async (req, res) => {
-    const userId = req.params.id;
-    const { firstName, lastName, Job, Description, Rate ,Image} = req.body;
+    const { Rate, userId } = req.body;
 
     try {
         const updatedRateUser = await RateuserModel.findByIdAndUpdate(
             userId,
-            { firstName, lastName, Job, Description, Rate,Image },
+            { $push: { Rate: Rate } }, 
             { new: true, runValidators: true }
         );
 
@@ -66,6 +63,7 @@ const UpdateRateUser = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 const GetRateUser = async (req, res) => {
     const userId = req.params.id; 
