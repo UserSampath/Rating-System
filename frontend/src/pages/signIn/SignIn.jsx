@@ -4,6 +4,8 @@ import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
 import validator from "validator";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -11,8 +13,10 @@ const SignIn = () => {
   //errors
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [backendError, setBackendError] = useState("");
 
-const signInButtonClicked = () => {
+
+const signInButtonClicked = async() => {
   if (!email) {
     setEmailError("Enter email");
   } else if (!validator.isEmail(email)) {
@@ -21,9 +25,38 @@ const signInButtonClicked = () => {
     setPasswordError("Enter password");
   } else if (!validator.isLength(password, { min: 8 })) {
     setPasswordError("Password must be at least 8 characters long");
-  } else {
-      console.log("dve");
-  }
+  }else {
+      await axios
+        .post("http://localhost:4000/api/user/login", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            localStorage.setItem("user", JSON.stringify(res.data.token));
+            Swal.fire({
+              icon: "success",
+              title: "successfully registered",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+          setTimeout(() => {
+            navigate("/admin");
+          }, 1500);
+        })
+        .catch((err) => {
+          if (err.response.data.error) {
+            console.log();
+            setBackendError(err.response.data.error);
+            Swal.fire({
+              title: "Sign Up failed",
+              text: backendError,
+              icon: "question",
+            });
+          }
+        });
+    }
 
 
 };

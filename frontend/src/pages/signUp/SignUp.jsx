@@ -3,15 +3,12 @@ import "./SignUp.css";
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
 import Swal from "sweetalert2";
-import validator from "validator"
+import validator from "validator";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const SignUp = () => {
-    const navigate = useNavigate();
-  //  Swal.fire({
-  //    title: "Login failed?",
-  //    text: "That thing is still around?",
-  //    icon: "question",
-  //  });
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,10 +20,8 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-
-  const signUpButtonClicked = () => {
-   
-
+  const [backendError, setBackendError] = useState("");
+  const signUpButtonClicked = async () => {
     if (!firstName) {
       setFirstNameError("Enter first name");
     } else if (!lastName) {
@@ -39,11 +34,42 @@ const SignUp = () => {
       setPasswordError("Enter password");
     } else if (!validator.isLength(password, { min: 8 })) {
       setPasswordError("Password must be at least 8 characters long");
+    } else {
+      await axios
+        .post("http://localhost:4000/api/user/signup", {
+          firstName,
+          lastName,
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            
+            localStorage.setItem("user", JSON.stringify(res.data.token));
+            Swal.fire({
+              icon: "success",
+              title: "successfully registered",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+          setTimeout(() => {
+            navigate("/admin");
+          }, 1500);
+        })
+        .catch((err) => {
+          if (err.response.data.error) {
+            console.log();
+            setBackendError(err.response.data.error);
+            Swal.fire({
+              title: "Sign Up failed",
+              text: backendError,
+              icon: "question",
+            });
+          }
+        });
     }
-
-     console.log("signUp");
-      
-  }
+  };
 
   return (
     <div className="signUpPage">
@@ -95,13 +121,21 @@ const SignUp = () => {
               />
 
               <div className="buttonsContainer">
-                <Button type={"1"} text="Sign Up" onClick={signUpButtonClicked}  />
+                <Button
+                  type={"1"}
+                  text="Sign Up"
+                  onClick={signUpButtonClicked}
+                />
               </div>
               <div className="newHereContainer">
                 <div>
                   <h2>Already have an account?</h2>
                   <div className="newHereButton2">
-                    <Button onClick={()=>navigate("/login")} type={"2"} text="Sign In" />
+                    <Button
+                      onClick={() => navigate("/login")}
+                      type={"2"}
+                      text="Sign In"
+                    />
                   </div>
                 </div>
               </div>

@@ -34,11 +34,11 @@ const UserDetails = () => {
         <p style={{fontSize:"17px", color:"gray",fontWeight:"600"}} className="col-2">Software engineer</p>
 
         <div className="col-2 d-flex justify-content-center align-items-center">
-          {[...Array(4)].map(() => (
-            <FaStar color="gold" />
+          {[...Array(4)].map((index) => (
+            <FaStar color="gold" key={index} />
           ))}
-          {[...Array(5-4)].map(() => (
-            <FaStar color="gray" />
+          {[...Array(5-4)].map((index) => (
+            <FaStar color="gray" key={index} />
           ))}
           <div style={{ fontSize: "16px", marginTop: "4px" ,color:"gray"}}>(5)</div>
         </div>
