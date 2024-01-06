@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignIn.css";
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
-
+import validator from "validator";
+import { useNavigate } from "react-router-dom";
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  //errors
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+const signInButtonClicked = () => {
+  if (!email) {
+    setEmailError("Enter email");
+  } else if (!validator.isEmail(email)) {
+    setEmailError("Enter valid email");
+  } else if (!password) {
+    setPasswordError("Enter password");
+  } else if (!validator.isLength(password, { min: 8 })) {
+    setPasswordError("Password must be at least 8 characters long");
+  } else {
+      console.log("dve");
+  }
+
+
+};
+
   return (
     <div className="signUpPage">
       <div className="boxContainer">
@@ -16,23 +40,34 @@ const SignIn = () => {
                 icon={"mail"}
                 inputName={"Email"}
                 placeholder={"Enter Email"}
-                errorMessage={""}
+                value={email}
+                onChange={(value) => setEmail(value)}
+                errorMessage={emailError}
+                onFocus={() => setEmailError("")}
               />
               <TextInput
                 type={"password"}
                 icon={"lock"}
                 inputName={"Password"}
                 placeholder={"Enter Password"}
+                value={password}
+                onChange={(value) => setPassword(value)}
+                errorMessage={passwordError}
+                onFocus={() => setPasswordError("")}
               />
 
               <div className="buttonsContainer">
-                <Button type={"1"} text="Sign In" />
+                <Button
+                  onClick={signInButtonClicked}
+                  type={"1"}
+                  text="Sign In"
+                />
               </div>
               <div className="newHereContainer">
                 <div>
                   <h2>New Here?</h2>
                   <div className="newHereButton">
-                    <Button type={"2"} text="Sign Up" />
+                    <Button onClick={()=>navigate("/register")} type={"2"} text="Sign Up" />
                   </div>
                 </div>
               </div>
