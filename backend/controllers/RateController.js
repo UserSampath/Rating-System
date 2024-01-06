@@ -48,7 +48,7 @@ const DeleteRateUser = async (req, res) => {
 };
 
 const UpdateRateUser = async (req, res) => {
-    const userId = req.params.id; // Assuming you pass the user id in the URL parameter
+    const userId = req.params.id;
     const { firstName, lastName, Job, Description, Rate ,Image} = req.body;
 
     try {
@@ -69,8 +69,7 @@ const UpdateRateUser = async (req, res) => {
 };
 
 const GetRateUser = async (req, res) => {
-    const userId = req.params.id; // Assuming you pass the user id in the URL parameter
-
+    const userId = req.params.id; 
     try {
         const rateUser = await RateuserModel.findById(userId);
 

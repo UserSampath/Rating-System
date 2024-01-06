@@ -6,28 +6,28 @@ import {  Form } from 'react-bootstrap'; // Make sure to import the necessary co
 
 import { FaUser, FaBriefcase, FaFile, FaImage,FaPlus } from 'react-icons/fa'; // Import icons as needed
 
-import "./AdminDashboard.css"
+import "./AddUserModal.css"
 
-const AdminDashboard = () => {
+const AddUserModal = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = () => {
-    // Handle form submission logic here
     handleClose();
   };
+
   return (
     <div>
     <Navbars />
-    <div className='btncontainer'>
-  <div className='btnDiv'>
-    <Button style={{ backgroundColor: 'green', fontSize: '1.5em' }} onClick={handleShow}>
-      <FaPlus />
-    </Button>
-  </div>
-  
+            {/* <div className='btncontainer'>
+        <div className='btnDiv'>
+            <Button style={{ backgroundColor: 'green', fontSize: '1.5em' }} onClick={handleShow}>
+            <FaPlus />
+            </Button>
+        </div>
+        </div> */}
   <Modal show={show} onHide={handleClose}>
       <Modal.Header  >
       <Modal.Title style={{ margin: "auto",paddingLeft:"0px",fontSize:"30px" }}>Add User</Modal.Title>
@@ -79,10 +79,10 @@ const AdminDashboard = () => {
         </Button>
       </Modal.Footer>
     </Modal>
-</div>
+
 </div>
 
   )
 }
 
-export default AdminDashboard
+export default AddUserModal
