@@ -2,8 +2,13 @@ import React from "react";
 import "./SignUp.css";
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
-
+import Swal from "sweetalert2";
 const SignUp = () => {
+   Swal.fire({
+     title: "Login failed?",
+     text: "That thing is still around?",
+     icon: "question",
+   });
   return (
     <div className="signUpPage">
       <div className="boxContainer">
