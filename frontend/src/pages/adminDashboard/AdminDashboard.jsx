@@ -71,7 +71,14 @@ const AdminDashboard = () => {
           </div>
 
           {users && users.map((user,index) => {
-            return <UserDetails user={user} key={index} onUserDeleted={handleUserDeleted} />;
+            return (
+              <UserDetails
+                user={user}
+                key={index}
+                onUserDeleted={handleUserDeleted}
+                getUserData={getUserData}
+              />
+            );
           })}
         </div>
       </div>

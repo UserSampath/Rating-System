@@ -1,13 +1,13 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import IconButton from "../IconButton/IconButton";
 import { FaStar } from "react-icons/fa";
 import EditUserModal from "../EditUserModal/EditUserModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import axios from "axios";
-import 'sweetalert2/dist/sweetalert2.min.css'; 
-import Swal from 'sweetalert2'
-const UserDetails = ({ user,onUserDeleted  }) => {
+import "sweetalert2/dist/sweetalert2.min.css";
+import Swal from "sweetalert2";
+const UserDetails = ({ user, onUserDeleted, getUserData }) => {
   const [show, setShow] = useState(false);
   const [showDelete, setDeleteShow] = useState(false);
 
@@ -18,80 +18,60 @@ const UserDetails = ({ user,onUserDeleted  }) => {
   const handleDeleteShow = () => setDeleteShow(true);
   const [avgStars, setAvgStars] = useState(0);
 
-  
-
-useEffect(() => {
-  const getAvgStars = () => {
-    if (user.Rate.length === 0) {
-      setAvgStars(0);
-    } else {
-      let sumStars = 0;
-      for (let i = 0; i < user.Rate.length; i++) {
-        sumStars = sumStars + user.Rate[i];
+  useEffect(() => {
+    const getAvgStars = () => {
+      if (user.Rate.length === 0) {
+        setAvgStars(0);
+      } else {
+        let sumStars = 0;
+        for (let i = 0; i < user.Rate.length; i++) {
+          sumStars = sumStars + user.Rate[i];
+        }
+        setAvgStars(Math.floor(sumStars / user.Rate.length));
       }
-      setAvgStars(Math.floor(sumStars / user.Rate.length));
-    }
-  };
-
-  getAvgStars();
-}, [user]);
-  
-const handleEditUser = async (updatedUserData) => {
-  console.log(user._id, updatedUserData);
-  try {
-    const response = await axios.put(`http://localhost:4000/api/rate/updateUser/${user._id}`, updatedUserData);
-    console.log(updatedUserData, response);
-    console.log("User updated successfully:", response.data);
-  } catch (error) {
-    console.error("Error updating user:", error);
-  }
-};
-
-
-  const [base64Image, setBase64Image] = useState("");
-useEffect(() => {
-  const loadImage = () => {
-    const imageBuffer = user.Image.data;
-    const uint8Array = new Uint8Array(imageBuffer);
-    const blob = new Blob([uint8Array], { type: "image/jpeg" });
-
-    const reader = new FileReader();
-    reader.onloadend = function () {
-      const base64Image = reader.result.split(",")[1];
-      setBase64Image(base64Image);
     };
 
-    reader.readAsDataURL(blob);
+    getAvgStars();
+  }, [user]);
+
+  const handleEditUser = async (updatedUserData) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/api/rate/updateUser/${user._id}`,
+        updatedUserData
+      );
+      getUserData();
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
 
-  loadImage();
-}, [user.Image.data]);
-
-
-const handleDelete = async () => {
-  console.log(user._id);
+  const handleDelete = async () => {
+    console.log(user._id);
     try {
-      const response = await axios.delete(`http://localhost:4000/api/rate/deleteRateUser/${user._id}`);
+      const response = await axios.delete(
+        `http://localhost:4000/api/rate/deleteRateUser/${user._id}`
+      );
 
       if (response.status === 200) {
-        const { message,deletedRateUser  } = response.data;
+        const { message, deletedRateUser } = response.data;
         Swal.fire({
-            icon: 'success',
-            title: 'Success! ',
-            text: message,
-            showConfirmButton: false,
-            timer: 3000,
-          });
-          console.log('Rateuser data:', deletedRateUser);
-          handleDeleteClose(); 
-          onUserDeleted(user._id);
+          icon: "success",
+          title: "Success! ",
+          text: message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+        console.log("Rateuser data:", deletedRateUser);
+        handleDeleteClose();
+        onUserDeleted(user._id);
       } else {
-        console.error('Error deleting user rate:', response.data.error);
+        console.error("Error deleting user rate:", response.data.error);
       }
     } catch (error) {
-      console.error('Error deleting user rate:', error.message);
+      console.error("Error deleting user rate:", error.message);
     }
-}
+  };
 
   return (
     <div>
@@ -112,10 +92,14 @@ const handleDelete = async () => {
             alignItems: "center",
           }}>
           <img
-            src={user.Image ?user.Image:"../../../image/Men.png"}
+            src={user.Image ? user.Image : "../../../image/Men.png"}
             alt=""
-            style={{ borderRadius: "50px", width: "45px", height: "45px",border : "2px solid #6efe67"}}
-            
+            style={{
+              borderRadius: "50px",
+              width: "45px",
+              height: "45px",
+              border: "2px solid #6efe67",
+            }}
           />
           <div
             style={{
@@ -168,9 +152,12 @@ const handleDelete = async () => {
           </button>
         </div>
       </Container>
-      <EditUserModal show={show} handleClose={handleClose}   
+      <EditUserModal
+        show={show}
+        handleClose={handleClose}
         userData={user}
-        handleEdit={handleEditUser}/>
+        handleEdit={handleEditUser}
+      />
       <DeleteModal
         userData={user}
         showDelete={showDelete}
