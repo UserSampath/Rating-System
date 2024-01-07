@@ -20,7 +20,7 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const [backendError, setBackendError] = useState("");
+
   const signUpButtonClicked = async () => {
     if (!firstName) {
       setFirstNameError("Enter first name");
@@ -45,7 +45,13 @@ const SignUp = () => {
         .then((res) => {
           if (res.status == 200) {
             
-            localStorage.setItem("user", JSON.stringify(res.data.token));
+            localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem(
+              "userName",
+              JSON.stringify(
+                `${res.data.user.firstName} ${res.data.user.lastName}`
+              )
+            );
             Swal.fire({
               icon: "success",
               title: "successfully registered",
@@ -60,10 +66,9 @@ const SignUp = () => {
         .catch((err) => {
           if (err.response.data.error) {
             console.log();
-            setBackendError(err.response.data.error);
             Swal.fire({
               title: "Sign Up failed",
-              text: backendError,
+              text: err.response.data.error,
               icon: "question",
             });
           }

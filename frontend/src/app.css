@@ -117,24 +117,19 @@ p{
 /* ---------scrollbar----------- */
 
   ::-webkit-scrollbar {
-    width: 12px; /* Set the width of the scrollbar */
+    width: 12px; 
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #07081c; /* Change the color of the scrollbar thumb */
+    background-color:#f3813f; 
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color:#0c0f46; /* Change the color on hover */
+    background-color:var(--color2); 
   }
 
   ::-webkit-scrollbar-track {
-    background-color:#18dcff;
+    background-color:#acf49a;
   }
 
-  /* Firefox */
-  * {
-    scrollbar-width: thin; /* "auto" may also be used */
-    scrollbar-color:#07081c #18dcff; /* Change the scrollbar thumb and track colors */
-  }
 

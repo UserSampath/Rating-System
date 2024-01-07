@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 import Star from '../Star/Star';
 import "./Modal.css";
+import axios from 'axios';
 
 const Modals = ({ data }) => {
   const [userRating, setUserRating] = useState(0); 
@@ -21,9 +22,18 @@ const Modals = ({ data }) => {
     console.log("Selected Stars:", clickedRating);
   };
 
-  const handleSubmit = () => {
-    
+  const handleSubmit = async () => {
+    console.log(data, userRating);
     setSubmitted(true);
+    await axios
+      .put("http://localhost:4000/api/rate/rateUser",{id:data._id,Rate:userRating})
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+
+      });
   };
 
   const renderStars = (rating) => {

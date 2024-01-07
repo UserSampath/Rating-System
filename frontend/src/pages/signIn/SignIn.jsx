@@ -13,7 +13,6 @@ const SignIn = () => {
   //errors
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [backendError, setBackendError] = useState("");
 
 
 const signInButtonClicked = async() => {
@@ -33,13 +32,19 @@ const signInButtonClicked = async() => {
         })
         .then((res) => {
           if (res.status == 200) {
-            localStorage.setItem("user", JSON.stringify(res.data.token));
+            localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem(
+              "userName",
+              JSON.stringify(`${res.data.user.firstName} ${res.data.user.lastName}`)
+            );
+
             Swal.fire({
               icon: "success",
               title: "successfully registered",
               showConfirmButton: false,
               timer: 1500,
             });
+            console.log(res.data)
           }
           setTimeout(() => {
             navigate("/admin");
@@ -47,11 +52,9 @@ const signInButtonClicked = async() => {
         })
         .catch((err) => {
           if (err.response.data.error) {
-            console.log();
-            setBackendError(err.response.data.error);
-            Swal.fire({
+             Swal.fire({
               title: "Sign Up failed",
-              text: backendError,
+              text: err.response.data.error,
               icon: "question",
             });
           }

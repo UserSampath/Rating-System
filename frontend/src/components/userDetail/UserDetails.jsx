@@ -97,10 +97,10 @@ useEffect(() => {
         </p>
 
         <div className="col-2 d-flex justify-content-center align-items-center">
-          {[...Array(avgStars)].map((index) => (
+          {[...Array(avgStars)].map((_,index) => (
             <FaStar color="gold" key={index} />
           ))}
-          {[...Array(5 - avgStars)].map((index) => (
+          {[...Array(5 - avgStars)].map((_,index) => (
             <FaStar color="gray" key={index} />
           ))}
           <div style={{ fontSize: "16px", marginTop: "4px", color: "gray" }}>
