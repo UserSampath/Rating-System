@@ -85,7 +85,6 @@ const GetRateUser = async (req, res) => {
 // new
 const rateUser = async (req, res) => {
     const { Rate, id } = req.body;
-
     try {
         const updatedRateUser = await RateuserModel.findByIdAndUpdate(
             id,

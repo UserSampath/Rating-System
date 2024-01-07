@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require('multer');
-
+const userAuthentication = require("../middleware/userAuthentication");
 const storage = multer.memoryStorage(); 
 const upload = multer({ storage: storage });
 
@@ -12,6 +12,6 @@ router.post("/addNewRateUser", addNewRateUser);
 router.delete ("/deleteRateUser/:id",DeleteRateUser);
 router.put("/UpdateRateUser", UpdateRateUser);
 router.put("/rateUser", rateUser);
-router.get("/getRateUsers", getRateUsers);
+router.get("/getRateUsers", userAuthentication, getRateUsers);
 router.get ("/getRateUser/:id",GetRateUser);
 module.exports = router;
