@@ -6,15 +6,16 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoute");
 const RateUserRoutes = require("./routes/RateUser");
 require('dotenv').config();
-app.use(bodyParser.json());
+
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+
 
 
 app.use(
-    cors({
-        origin: "*",
-    })
+    cors()
 );
+
 app.use(express.json());
 mongoose.set("strictQuery", true);
 

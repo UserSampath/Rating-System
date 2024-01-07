@@ -5,9 +5,10 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const router = express.Router();
-const { RateUserAdd, DeleteRateUser, UpdateRateUser, GetRateUser, rateUser, getRateUsers } = require("../controllers/RateController") ;
+const { DeleteRateUser, UpdateRateUser, GetRateUser, rateUser, getRateUsers, addNewRateUser } = require("../controllers/RateController") ;
 
-router.post("/addRateUser", upload.single('Image'), RateUserAdd);
+router.post("/addNewRateUser", addNewRateUser);
+
 router.delete ("/deleteRateUser/:id",DeleteRateUser);
 router.put("/UpdateRateUser", UpdateRateUser);
 router.put("/rateUser", rateUser);

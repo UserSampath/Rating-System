@@ -19,13 +19,14 @@ const Navbars = () => {
             height="40" // Set the desired height
             className="d-inline-block align-top"
           />
-          <span className="ms-4">Lenzz Rating System</span>
+          <span style={{ color: "#ffffff",fontWeight:"600" }} className="ms-4">
+            Lenzz Rating System
+          </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {/* Add your navigation links or components here */}
-            
           </Nav>
         </Navbar.Collapse>
       </Navbar>
