@@ -66,12 +66,18 @@ const AdminDashboard = () => {
             </button>
           </div>
 
-          {users && users.map((user,index) => {
-            return <UserDetails user={user} key={index} />;
-          })}
+          {users &&
+            users.map((user, index) => {
+              return <UserDetails user={user} key={index} />;
+            })}
         </div>
       </div>
-      <AddUserModal show={show} handleClose={handleClose} />
+      <AddUserModal
+        show={show}
+        setShow={setShow}
+        handleClose={handleClose}
+        getUserData={getUserData}
+      />
     </div>
   );
 };
