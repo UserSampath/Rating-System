@@ -5,7 +5,7 @@
   width: 230px;
   position: fixed;
   top: 50px;
-  border-right: 1px solid wheat;
+  border-right: 2px solid rgb(250, 222, 169);
 }
 
 .selectedSidebarButton {
