@@ -46,13 +46,13 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     await axios
       .post("http://localhost:4000/api/rate/addNewRateUser", formData)
       .then((response) => {
-        const { message, Rateuser } = response.data;
+        
         setShow(false);
         getUserData();
         Swal.fire({
           icon: "success",
           title: "Success!",
-          text: response.data,
+          text:"User added successfully",
           showConfirmButton: false,
           timer: 3000,
         });
