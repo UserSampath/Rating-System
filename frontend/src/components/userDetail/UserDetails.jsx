@@ -60,7 +60,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
           title: "Success! ",
           text: message,
           showConfirmButton: false,
-          timer: 3000,
+          timer: 1500,
         });
         console.log("Rateuser data:", deletedRateUser);
         handleDeleteClose();
