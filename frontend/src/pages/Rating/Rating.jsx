@@ -59,9 +59,9 @@ const Rating = () => {
         onClick={handlePrev}
         disabled={index === 0}
         style={{
-          borderRadius: '50%', // Make the button rounded
-          padding: '10px', // Adjust the padding as needed
-          backgroundColor: '#fff', // Set the background color
+          borderRadius: '50%', 
+          padding: '10px', 
+          backgroundColor: '#fff', 
           border: '1px solid #ccc', 
           cursor: 'pointer',
           transition: 'background-color 0.3s', 
@@ -80,19 +80,19 @@ const Rating = () => {
         onClick={handleNext}
         disabled={index === modalData.length - 1}
         style={{
-          borderRadius: '50%', // Make the button rounded
-          padding: '10px', // Adjust the padding as needed
-          backgroundColor: '#fff', // Set the background color
-          border: '1px solid #ccc', // Add a border for better visibility
+          borderRadius: '50%', 
+          padding: '10px', 
+          backgroundColor: '#fff', 
+          border: '1px solid #ccc', 
           cursor: 'pointer',
-          transition: 'background-color 0.3s', // Add a smooth transition
-          outline: 'none', // Remove the default focus outline
+          transition: 'background-color 0.3s', 
+          outline: 'none', 
         }}
         onMouseOver={(e) => {
-          e.target.style.backgroundColor = '#eee'; // Change background color on hover
+          e.target.style.backgroundColor = '#eee'; 
         }}
         onMouseOut={(e) => {
-          e.target.style.backgroundColor = '#fff'; // Reset background color on hover out
+          e.target.style.backgroundColor = '#fff'; 
         }}
       >
         <FaArrowRight />
