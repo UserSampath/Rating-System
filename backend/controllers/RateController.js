@@ -2,28 +2,7 @@ const RateuserModel = require("../models/RateModel");
 
 
 
-const RateUserAdd = async (req, res) => {
-    const { firstName, lastName, Job, Description, } = req.body;
 
-    try {
-        const imageBuffer = req.file.buffer;
-        const imageBase64 = imageBuffer.toString('base64');
-
-        const Rateuser = new RateuserModel({
-            firstName,
-            lastName,
-            Job,
-            Description,
-            Image: imageBase64,
-        });
-
-        await Rateuser.save();
-
-        res.status(200).json({ message: 'User  submitted successfully!', Rateuser });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
 
 const addNewRateUser = async (req, res) => {
     const { firstName, lastName, Job, Description, Image } = req.body;
@@ -134,7 +113,6 @@ const getRateUsers = async (req, res) => {
 };
 
 module.exports = {
-    RateUserAdd,
     DeleteRateUser,
     UpdateRateUser,
     GetRateUser,
