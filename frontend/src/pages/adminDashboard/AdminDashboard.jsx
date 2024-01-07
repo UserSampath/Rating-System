@@ -73,19 +73,25 @@ const AdminDashboard = () => {
             </button>
           </div>
 
-          {users && users.map((user,index) => {
-            return (
-              <UserDetails
-                user={user}
-                key={index}
-                onUserDeleted={handleUserDeleted}
-                getUserData={getUserData}
-              />
-            );
-          })}
+          {users &&
+            users.map((user, index) => {
+              return (
+                <UserDetails
+                  user={user}
+                  key={index}
+                  onUserDeleted={handleUserDeleted}
+                  getUserData={getUserData}
+                />
+              );
+            })}
         </div>
       </div>
-      <AddUserModal show={show} handleClose={handleClose} onUserAdded={handleUserAdded} />
+      <AddUserModal
+        show={show}
+        setShow={setShow}
+        handleClose={handleClose}
+        getUserData={getUserData}
+      />
     </div>
   );
 };

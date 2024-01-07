@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import { Form } from "react-bootstrap";
@@ -9,7 +9,8 @@ import "./AddUserModal.css";
 import FileBase64 from "react-file-base64";
 import axios from "axios";
 
-const AddUserModal = ({ handleClose, show ,onUserAdded}) => {
+const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,6 +20,16 @@ const AddUserModal = ({ handleClose, show ,onUserAdded}) => {
   });
   const [image, setImage] = useState("");
 
+  useEffect(() => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      Job: "",
+      Description: "",  
+      Image: null,
+    });
+  }, [show]);
+
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -26,34 +37,35 @@ const AddUserModal = ({ handleClose, show ,onUserAdded}) => {
       ...prevFormData,
       [name]: value,
     }));
-
   };
 
-    const handleSubmit = async () => {
+  const handleSubmit = async () => {
+    formData.Image = image;
+    console.log(formData);
 
-      formData.Image = image;
-      console.log(formData);
-
-      await axios.post("http://localhost:4000/api/rate/addNewRateUser",formData).then((response) => {
-         const { message, Rateuser } = response.data;
-         Swal.fire({
-           icon: "success",
-           title: "Success!",
-           text: message,
-           showConfirmButton: false,
-           timer: 3000,
-         });
-         
-         handleClose();
-      }).catch((error) => {
+    await axios
+      .post("http://localhost:4000/api/rate/addNewRateUser", formData)
+      .then((response) => {
+        const { message, Rateuser } = response.data;
+        setShow(false);
+        getUserData();
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: response.data,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      })
+      .catch((error) => {
         console.error("Error submitting data:", error);
-         Swal.fire({
-           icon: "error",
-           title: "Error!",
-           text: "Error submitting data. Please try again.",
-         });
-        })
-    };
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: "Error submitting data. Please try again.",
+        });
+      });
+  };
 
   return (
     <div>
@@ -141,8 +153,8 @@ const AddUserModal = ({ handleClose, show ,onUserAdded}) => {
             Close
           </Button>
           <Button variant="success" onClick={handleSubmit}>
-        Save Changes
-      </Button>
+            Save Changes
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
