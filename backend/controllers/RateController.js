@@ -25,6 +25,29 @@ const RateUserAdd = async (req, res) => {
     }
 };
 
+const addNewRateUser = async (req, res) => {
+    const { firstName, lastName, Job, Description, Image } = req.body;
+    try {
+
+        const rateUser = new RateuserModel({
+            firstName,
+            lastName,
+            Job,
+            Description,
+            Image: Image,
+        });
+
+        await rateUser.save();
+
+        res.status(200).json({ message: 'User  submitted successfully!', rateUser });
+
+    } catch (error) {
+        console.log("ddd")
+        res.status(400).json({ error: error.message });
+    }
+
+}
+
 
 
 
@@ -89,14 +112,14 @@ const rateUser = async (req, res) => {
             id,
             { $push: { Rate: Rate } },
             { new: true }
-            
+
         );
 
         if (!updatedRateUser) {
             throw Error("User not found");
         }
 
-        res.status(200).json({ message: "User updated successfully",Rate:updatedRateUser.Rate});
+        res.status(200).json({ message: "User updated successfully", Rate: updatedRateUser.Rate });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -116,5 +139,6 @@ module.exports = {
     UpdateRateUser,
     GetRateUser,
     rateUser,
-    getRateUsers
+    getRateUsers,
+    addNewRateUser
 }

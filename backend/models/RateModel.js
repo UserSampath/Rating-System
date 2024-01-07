@@ -23,8 +23,7 @@ const RateUserSchema = new Schema(
       type: [Number], 
     },
     Image: {
-      type: Buffer, 
-      required: true,
+      type: String,
     },
   },
   {

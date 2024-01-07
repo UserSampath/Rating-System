@@ -34,24 +34,28 @@ useEffect(() => {
 }, [user]);
   
   
-  const getImageSrc = () => {
-      return "../../../image/profile.png";
-     if (
-       user.Image &&
-       user.Image.type === "Buffer" &&
-       Array.isArray(user.Image.data)
-     ) {
-       const imageBuffer = Buffer.from(user.Image.data);
-       const base64Image = imageBuffer.toString("base64");
-       return `data:image/png;base64,${base64Image}`;
-     }
-     // If the format is not as expected, return a default image source
-    
-   };
 
+  const [base64Image, setBase64Image] = useState("");
+useEffect(() => {
+  const loadImage = () => {
+    const imageBuffer = user.Image.data;
+    const uint8Array = new Uint8Array(imageBuffer);
+    const blob = new Blob([uint8Array], { type: "image/jpeg" });
 
- 
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      const base64Image = reader.result.split(",")[1];
+      setBase64Image(base64Image);
+    };
 
+    reader.readAsDataURL(blob);
+  };
+
+  loadImage();
+}, [user.Image.data]);
+// console.log("Image Data:", user.Image.data);
+  
+  
   return (
     <div>
       {" "}
@@ -68,13 +72,13 @@ useEffect(() => {
           className="col-3"
           style={{
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
           }}>
           <img
-            src={getImageSrc}
+            src={user.Image ?user.Image:"../../../image/Men.png"}
             alt=""
-            style={{ borderRadius: "50px", width: "45px", height: "45px" }}
+            style={{ borderRadius: "50px", width: "45px", height: "45px",border : "2px solid #6efe67"}}
+            
           />
           <div
             style={{
