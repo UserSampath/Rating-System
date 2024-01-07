@@ -21,13 +21,41 @@ const addNewRateUser = async (req, res) => {
         res.status(200).json({ message: 'User  submitted successfully!', rateUser });
 
     } catch (error) {
-        console.log("ddd")
         res.status(400).json({ error: error.message });
     }
 
 }
 
-
+const updateUser = async (req, res) => {
+    const userId = req.params.userId; 
+    const { firstName, lastName, Job, Description, Image } = req.body;
+  
+    try {
+     
+      const userToUpdate = await RateuserModel.findById(userId);
+  
+      if (!userToUpdate) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      
+      userToUpdate.firstName = firstName;
+      userToUpdate.lastName = lastName;
+      userToUpdate.Job = Job;
+      userToUpdate.Description = Description;
+      userToUpdate.Image = Image;
+  
+     
+      await userToUpdate.save();
+  
+      res.status(200).json({ message: 'User updated successfully!', updatedUser: userToUpdate });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+  
+  
+  
 
 
 const DeleteRateUser = async (req, res) => {
@@ -118,5 +146,6 @@ module.exports = {
     GetRateUser,
     rateUser,
     getRateUsers,
-    addNewRateUser
+    addNewRateUser,
+    updateUser
 }

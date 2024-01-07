@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 import { Form } from 'react-bootstrap';
@@ -7,7 +7,7 @@ import Axios from 'axios';
 import { FaUser, FaBriefcase, FaFile, FaImage } from 'react-icons/fa';
 
 
-const EditUserModal = ({ handleClose, show }) => {
+const EditUserModal = ({ handleClose, show ,userData, handleEdit}) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,6 +15,18 @@ const EditUserModal = ({ handleClose, show }) => {
     Description: '',
     Image: null, 
   });
+
+ {} useEffect(() => {
+    setFormData({
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      Job: userData.Job,
+      Description: userData.Description,
+      Image: userData.Image,
+    });
+ 
+}, [userData]);
+;
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -26,7 +38,8 @@ const EditUserModal = ({ handleClose, show }) => {
   };
 
   const handleSubmit = (e) => {
-
+ handleEdit(formData);
+    handleClose();
   }
 
 

@@ -9,7 +9,7 @@ import "./AddUserModal.css";
 import FileBase64 from "react-file-base64";
 import axios from "axios";
 
-const AddUserModal = ({ handleClose, show }) => {
+const AddUserModal = ({ handleClose, show ,onUserAdded}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -43,6 +43,8 @@ const AddUserModal = ({ handleClose, show }) => {
            showConfirmButton: false,
            timer: 3000,
          });
+         
+         handleClose();
       }).catch((error) => {
         console.error("Error submitting data:", error);
          Swal.fire({
@@ -51,8 +53,6 @@ const AddUserModal = ({ handleClose, show }) => {
            text: "Error submitting data. Please try again.",
          });
         })
-
-
     };
 
   return (

@@ -35,7 +35,14 @@ const AdminDashboard = () => {
          console.log(err);
        });
    };
-  
+   const handleUserDeleted = (deletedUserId) => {
+    setUsers(prevUsers => prevUsers.filter(user => user._id !== deletedUserId));
+  };
+
+  const handleUserAdded = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+  };
+
   return (
     <div className="adminPage">
       <Navbars />
@@ -64,11 +71,11 @@ const AdminDashboard = () => {
           </div>
 
           {users && users.map((user,index) => {
-            return <UserDetails user={user} key={index} />;
+            return <UserDetails user={user} key={index} onUserDeleted={handleUserDeleted} />;
           })}
         </div>
       </div>
-      <AddUserModal show={show} handleClose={handleClose} />
+      <AddUserModal show={show} handleClose={handleClose} onUserAdded={handleUserAdded} />
     </div>
   );
 };

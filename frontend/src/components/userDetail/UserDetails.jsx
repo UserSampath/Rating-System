@@ -4,7 +4,10 @@ import IconButton from "../IconButton/IconButton";
 import { FaStar } from "react-icons/fa";
 import EditUserModal from "../EditUserModal/EditUserModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
-const UserDetails = ({ user }) => {
+import axios from "axios";
+import 'sweetalert2/dist/sweetalert2.min.css'; 
+import Swal from 'sweetalert2'
+const UserDetails = ({ user,onUserDeleted  }) => {
   const [show, setShow] = useState(false);
   const [showDelete, setDeleteShow] = useState(false);
 
@@ -33,7 +36,17 @@ useEffect(() => {
   getAvgStars();
 }, [user]);
   
-  
+const handleEditUser = async (updatedUserData) => {
+  console.log(user._id, updatedUserData);
+  try {
+    const response = await axios.put(`http://localhost:4000/api/rate/updateUser/${user._id}`, updatedUserData);
+    console.log(updatedUserData, response);
+    console.log("User updated successfully:", response.data);
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
+};
+
 
   const [base64Image, setBase64Image] = useState("");
 useEffect(() => {
@@ -53,9 +66,33 @@ useEffect(() => {
 
   loadImage();
 }, [user.Image.data]);
-// console.log("Image Data:", user.Image.data);
-  
-  
+
+
+const handleDelete = async () => {
+  console.log(user._id);
+    try {
+      const response = await axios.delete(`http://localhost:4000/api/rate/deleteRateUser/${user._id}`);
+
+      if (response.status === 200) {
+        const { message,deletedRateUser  } = response.data;
+        Swal.fire({
+            icon: 'success',
+            title: 'Success! ',
+            text: message,
+            showConfirmButton: false,
+            timer: 3000,
+          });
+          console.log('Rateuser data:', deletedRateUser);
+          handleDeleteClose(); 
+          onUserDeleted(user._id);
+      } else {
+        console.error('Error deleting user rate:', response.data.error);
+      }
+    } catch (error) {
+      console.error('Error deleting user rate:', error.message);
+    }
+}
+
   return (
     <div>
       {" "}
@@ -131,10 +168,14 @@ useEffect(() => {
           </button>
         </div>
       </Container>
-      <EditUserModal show={show} handleClose={handleClose} />
+      <EditUserModal show={show} handleClose={handleClose}   
+        userData={user}
+        handleEdit={handleEditUser}/>
       <DeleteModal
+        userData={user}
         showDelete={showDelete}
         handleDeleteClose={handleDeleteClose}
+        handleDelete={handleDelete}
       />
     </div>
   );

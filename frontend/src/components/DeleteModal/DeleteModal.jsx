@@ -3,35 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 import 'sweetalert2/dist/sweetalert2.min.css'; 
 import Swal from 'sweetalert2'
+import axios from "axios";
 
-const DeleteModal = ({handleDeleteClose,showDelete,userId}) => {
+const DeleteModal = ({handleDeleteClose,showDelete,userData,handleDelete}) => {
 
-    const handleDelete = async () => {
-        try {
-          const response = await axios.delete(`http://localhost:4000/api/rate/deleteRateUser/${userId}`);
-    
-          if (response.status === 200) {
-            const { message,deletedRateUser  } = response.data;
-            Swal.fire({
-                icon: 'success',
-                title: 'Success! ',
-                text: message,
-                showConfirmButton: false,
-                timer: 3000,
-              });
-              console.log('Rateuser data:', deletedRateUser);
-              handleDeleteClose(); 
-
-          
-            
-          } else {
-            console.error('Error deleting user rate:', response.data.error);
-          }
-        } catch (error) {
-          console.error('Error deleting user rate:', error.message);
-        }
-    }
-
+  const handleDeleteButtonClick = async () => {
+    await handleDelete(); // Call the handleDelete function provided by UserDetails
+    handleDeleteClose(); // Close the modal
+  };
   return (
     <div>   
         <Modal show={showDelete} onHide={handleDeleteClose}>
@@ -47,7 +26,7 @@ const DeleteModal = ({handleDeleteClose,showDelete,userId}) => {
     <Button variant="secondary" onClick={handleDeleteClose}>
       Close
     </Button>
-    <Button variant="danger" onClick={handleDelete}>
+    <Button variant="danger" onClick={handleDeleteButtonClick}>
       Delete
     </Button>
   </Modal.Footer>
