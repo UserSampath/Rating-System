@@ -9,15 +9,17 @@ import UserDetails from "../../components/userDetail/UserDetails";
 import Button from "../../components/Button/Button"
 import { FaPlus } from 'react-icons/fa'; // Import icons as needed
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
+import Men from "../../../image/Men.png"
 
 
 const AdminDashboard = () => {
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+ 
   
   return (
     <div className="adminPage">

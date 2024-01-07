@@ -150,9 +150,9 @@ const AddUserModal = ({ handleClose, show }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
-          </Button>
+          <Button variant="success" onClick={handleSubmit}>
+        Save Changes
+      </Button>
         </Modal.Footer>
       </Modal>
     </div>

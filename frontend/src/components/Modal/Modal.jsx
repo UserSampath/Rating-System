@@ -47,15 +47,15 @@ const Modals = ({ data }) => {
       <Modal.Dialog className="shadow">
         <Modal.Body className="text-center">
           <div className='modalImage'>
-            <img src={data.image} alt="User" className='image' />
+            <img src={data.Image} alt="User" className='image' />
           </div>
           <div className='userD'>
             <div className='name'>
               <h4>{data.firstName}</h4>
-              <h4>{data.LastName}</h4>
+              <h4>{data.lastName}</h4>
             </div>
-            <p>{data.job}</p>
-            <p>{data.description}</p>
+            <p>{data.Job}</p>
+            <p>{data.Description}</p>
           </div>
           <h5>Give your Rate</h5>
           <div className="rating-stars" onClick={(e) => e.stopPropagation()}>
