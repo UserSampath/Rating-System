@@ -36,15 +36,17 @@ const SignUp = () => {
       setPasswordError("Password must be at least 8 characters long");
     } else {
       await axios
-        .post("http://localhost:4000/api/user/signup", {
-          firstName,
-          lastName,
-          email,
-          password,
-        })
+        .post(
+          "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/user/signup",
+          {
+            firstName,
+            lastName,
+            email,
+            password,
+          }
+        )
         .then((res) => {
           if (res.status == 200) {
-            
             localStorage.setItem("token", JSON.stringify(res.data.token));
             localStorage.setItem(
               "userName",

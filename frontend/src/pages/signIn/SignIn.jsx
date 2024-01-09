@@ -26,16 +26,21 @@ const signInButtonClicked = async() => {
     setPasswordError("Password must be at least 8 characters long");
   }else {
       await axios
-        .post("http://localhost:4000/api/user/login", {
-          email,
-          password,
-        })
+        .post(
+          "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/user/login",
+          {
+            email,
+            password,
+          }
+        )
         .then((res) => {
           if (res.status == 200) {
             localStorage.setItem("token", JSON.stringify(res.data.token));
             localStorage.setItem(
               "userName",
-              JSON.stringify(`${res.data.user.firstName} ${res.data.user.lastName}`)
+              JSON.stringify(
+                `${res.data.user.firstName} ${res.data.user.lastName}`
+              )
             );
 
             Swal.fire({
@@ -44,7 +49,7 @@ const signInButtonClicked = async() => {
               showConfirmButton: false,
               timer: 1500,
             });
-            console.log(res.data)
+            console.log(res.data);
           }
           setTimeout(() => {
             navigate("/admin");
@@ -52,7 +57,7 @@ const signInButtonClicked = async() => {
         })
         .catch((err) => {
           if (err.response.data.error) {
-             Swal.fire({
+            Swal.fire({
               title: "Sign Up failed",
               text: err.response.data.error,
               icon: "question",

@@ -12,13 +12,16 @@ const Rating = () => {
   const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/rate/getRateUsers')
-      .then(response => {
+    axios
+      .get(
+        "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/getRateUsers"
+      )
+      .then((response) => {
         setModalData(response.data);
         console.log(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching data from the backend:', error);
+      .catch((error) => {
+        console.error("Error fetching data from the backend:", error);
       });
   }, []); 
 

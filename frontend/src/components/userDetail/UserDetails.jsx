@@ -37,7 +37,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
   const handleEditUser = async (updatedUserData) => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/api/rate/updateUser/${user._id}`,
+        `http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/updateUser/${user._id}`,
         updatedUserData
       );
       getUserData();
@@ -50,7 +50,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
     console.log(user._id);
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/rate/deleteRateUser/${user._id}`
+        `http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/deleteRateUser/${user._id}`
       );
 
       if (response.status === 200) {

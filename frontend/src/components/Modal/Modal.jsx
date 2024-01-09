@@ -26,13 +26,15 @@ const Modals = ({ data }) => {
     console.log(data, userRating);
     setSubmitted(true);
     await axios
-      .put("http://localhost:4000/api/rate/rateUser",{id:data._id,Rate:userRating})
+      .put(
+        "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/rateUser",
+        { id: data._id, Rate: userRating }
+      )
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
-
       });
   };
 

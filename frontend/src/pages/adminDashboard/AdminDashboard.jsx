@@ -23,12 +23,17 @@ const AdminDashboard = () => {
   
    const getUserData = async () => {
      await axios
-       .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
-         headers: {
-           "Content-Type": "application/json",
-           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-         },
-       })
+       .get(
+         "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/getRateUsersForAdmin",
+         {
+           headers: {
+             "Content-Type": "application/json",
+             Authorization: `Bearer ${JSON.parse(
+               localStorage.getItem("token")
+             )}`,
+           },
+         }
+       )
        .then((res) => {
          console.log(res.data);
          setUsers(res.data);
