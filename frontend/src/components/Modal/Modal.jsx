@@ -57,7 +57,7 @@ const Modals = ({ data }) => {
       <Modal.Dialog className="shadow">
         <Modal.Body className="text-center">
           <div className='modalImage'>
-            <img src={data.Image} alt="User" className='image' />
+            <img src={data.Image ? data.Image :"../../../image/profile.png"} alt="User" className='image' />
           </div>
           <div className='userD'>
             <div className='name'>
