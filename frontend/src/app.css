@@ -132,4 +132,6 @@ p{
     background-color:#acf49a;
   }
 
-
+.signedInUser:hover{
+cursor: pointer;
+}

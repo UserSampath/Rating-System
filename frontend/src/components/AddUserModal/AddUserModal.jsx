@@ -46,7 +46,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     await axios
       .post("http://localhost:4000/api/rate/addNewRateUser", formData)
       .then((response) => {
-        
+        setImage("");
         setShow(false);
         getUserData();
         Swal.fire({

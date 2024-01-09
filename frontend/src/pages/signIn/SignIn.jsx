@@ -40,7 +40,7 @@ const signInButtonClicked = async() => {
 
             Swal.fire({
               icon: "success",
-              title: "successfully registered",
+              title: "login success",
               showConfirmButton: false,
               timer: 1500,
             });

@@ -13,6 +13,7 @@ router.delete("/deleteRateUser/:id", DeleteRateUser);
 router.put("/UpdateRateUser", UpdateRateUser);
 router.put("/rateUser", rateUser);
 router.get("/getRateUsers", getRateUsers);
+router.get("/getRateUsersForAdmin", userAuthentication, getRateUsers);
 router.put("/updateUser/:id", updateUser);
 router.get("/getRateUser/:id", GetRateUser);
 module.exports = router;

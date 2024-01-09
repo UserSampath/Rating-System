@@ -23,7 +23,7 @@ const AdminDashboard = () => {
   
    const getUserData = async () => {
      await axios
-       .get("http://localhost:4000/api/rate/getRateUsers", {
+       .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
          headers: {
            "Content-Type": "application/json",
            Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
        })
        .catch((err) => {
          console.log(err);
-         navigate("/login")
+         navigate("/login");
        });
    };
    const handleUserDeleted = (deletedUserId) => {

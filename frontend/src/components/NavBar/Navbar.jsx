@@ -29,7 +29,7 @@ const Navbars = () => {
             style={{ marginLeft: "30px" }}
             src={Logo}
             alt="Lenzz Rating system logo"
-            height="40" 
+            height="40"
             className="d-inline-block align-top"
           />
           <span
@@ -48,13 +48,18 @@ const Navbars = () => {
                   {showLogOut && <LogOutButton onClick={clickedLogOut} />}
 
                   <div
+                    className="signedInUser"
                     style={{ userSelect: "none" }}
                     onClick={() => setShowLogOut((prev) => !prev)}>
                     {localStorage.getItem("userName").replace(/"/g, "")}
                   </div>
                 </div>
               ) : (
-                <div onClick={()=>navigate("/login")}>Sign In</div>
+                <div
+                  className="signedInUser"
+                  onClick={() => navigate("/login")}>
+                  Sign In
+                </div>
               )}
             </div>
           </span>
