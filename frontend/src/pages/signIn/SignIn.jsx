@@ -14,25 +14,21 @@ const SignIn = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-
-const signInButtonClicked = async() => {
-  if (!email) {
-    setEmailError("Enter email");
-  } else if (!validator.isEmail(email)) {
-    setEmailError("Enter valid email");
-  } else if (!password) {
-    setPasswordError("Enter password");
-  } else if (!validator.isLength(password, { min: 8 })) {
-    setPasswordError("Password must be at least 8 characters long");
-  }else {
+  const signInButtonClicked = async () => {
+    if (!email) {
+      setEmailError("Enter email");
+    } else if (!validator.isEmail(email)) {
+      setEmailError("Enter valid email");
+    } else if (!password) {
+      setPasswordError("Enter password");
+    } else if (!validator.isLength(password, { min: 8 })) {
+      setPasswordError("Password must be at least 8 characters long");
+    } else {
       await axios
-        .post(
-          "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/user/login",
-          {
-            email,
-            password,
-          }
-        )
+        .post("http://localhost:4000/api/user/login", {
+          email,
+          password,
+        })
         .then((res) => {
           if (res.status == 200) {
             localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -65,9 +61,7 @@ const signInButtonClicked = async() => {
           }
         });
     }
-
-
-};
+  };
 
   return (
     <div className="signUpPage">
@@ -108,7 +102,11 @@ const signInButtonClicked = async() => {
                 <div>
                   <h2>New Here?</h2>
                   <div className="newHereButton">
-                    <Button onClick={()=>navigate("/register")} type={"2"} text="Sign Up" />
+                    <Button
+                      onClick={() => navigate("/register")}
+                      type={"2"}
+                      text="Sign Up"
+                    />
                   </div>
                 </div>
               </div>

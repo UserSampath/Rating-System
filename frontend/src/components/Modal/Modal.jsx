@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/esm/Button';
-import Star from '../Star/Star';
+import React, { useState, useEffect } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/esm/Button";
+import Star from "../Star/Star";
 import "./Modal.css";
-import axios from 'axios';
+import axios from "axios";
 
 const Modals = ({ data }) => {
-  const [userRating, setUserRating] = useState(0); 
+  const [userRating, setUserRating] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const modalTimeout = setTimeout(() => {
-      document.querySelector('.modal').classList.remove('show');
+      document.querySelector(".modal").classList.remove("show");
     }, 5000);
 
     return () => clearTimeout(modalTimeout);
@@ -26,10 +26,10 @@ const Modals = ({ data }) => {
     console.log(data, userRating);
     setSubmitted(true);
     await axios
-      .put(
-        "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/rateUser",
-        { id: data._id, Rate: userRating }
-      )
+      .put("http://localhost:4000/api/rate/rateUser", {
+        id: data._id,
+        Rate: userRating,
+      })
       .then((res) => {
         console.log(res);
       })
@@ -55,14 +55,20 @@ const Modals = ({ data }) => {
   };
 
   return (
-    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
+    <div
+      className="modal show"
+      style={{ display: "block", position: "initial" }}>
       <Modal.Dialog className="shadow">
         <Modal.Body className="text-center">
-          <div className='modalImage'>
-            <img src={data.Image ? data.Image :"../../../image/profile.png"} alt="User" className='image' />
+          <div className="modalImage">
+            <img
+              src={data.Image ? data.Image : "../../../image/profile.png"}
+              alt="User"
+              className="image"
+            />
           </div>
-          <div className='userD'>
-            <div className='name'>
+          <div className="userD">
+            <div className="name">
               <h4>{data.firstName}</h4>
               <h4>{data.lastName}</h4>
             </div>

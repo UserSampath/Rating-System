@@ -1,50 +1,45 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Side from "../../components/side/Side";
 import Navbars from "../../components/NavBar/Navbar";
 import UserDetails from "../../components/userDetail/UserDetails";
-import { FaPlus } from 'react-icons/fa'; 
+import { FaPlus } from "react-icons/fa";
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const AdminDashboard = () => {
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [users,setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => { 
+  useEffect(() => {
     getUserData();
   }, []);
-  
-   const getUserData = async () => {
-     await axios
-       .get(
-         "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/getRateUsersForAdmin",
-         {
-           headers: {
-             "Content-Type": "application/json",
-             Authorization: `Bearer ${JSON.parse(
-               localStorage.getItem("token")
-             )}`,
-           },
-         }
-       )
-       .then((res) => {
-         console.log(res.data);
-         setUsers(res.data);
-       })
-       .catch((err) => {
-         console.log(err);
-         navigate("/login");
-       });
-   };
-   const handleUserDeleted = (deletedUserId) => {
-    setUsers(prevUsers => prevUsers.filter(user => user._id !== deletedUserId));
+
+  const getUserData = async () => {
+    await axios
+      .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/login");
+      });
+  };
+  const handleUserDeleted = (deletedUserId) => {
+    setUsers((prevUsers) =>
+      prevUsers.filter((user) => user._id !== deletedUserId)
+    );
   };
 
   const handleUserAdded = (newUser) => {

@@ -10,7 +10,6 @@ import FileBase64 from "react-file-base64";
 import axios from "axios";
 
 const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -25,7 +24,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
       firstName: "",
       lastName: "",
       Job: "",
-      Description: "",  
+      Description: "",
       Image: null,
     });
   }, [show]);
@@ -44,10 +43,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     console.log(formData);
 
     await axios
-      .post(
-        "http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/addNewRateUser",
-        formData
-      )
+      .post("http://localhost:4000/api/rate/addNewRateUser", formData)
       .then((response) => {
         setImage("");
         setShow(false);

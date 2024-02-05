@@ -37,7 +37,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
   const handleEditUser = async (updatedUserData) => {
     try {
       const response = await axios.put(
-        `http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/updateUser/${user._id}`,
+        `http://localhost:4000/api/rate/updateUser/${user._id}`,
         updatedUserData
       );
       getUserData();
@@ -50,7 +50,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
     console.log(user._id);
     try {
       const response = await axios.delete(
-        `http://ec2-3-139-78-36.us-east-2.compute.amazonaws.com:6000/api/rate/deleteRateUser/${user._id}`
+        `http://localhost:4000/api/rate/deleteRateUser/${user._id}`
       );
 
       if (response.status === 200) {
@@ -118,10 +118,10 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
         </p>
 
         <div className="col-2 d-flex justify-content-center align-items-center">
-          {[...Array(avgStars)].map((_,index) => (
+          {[...Array(avgStars)].map((_, index) => (
             <FaStar color="gold" key={index} />
           ))}
-          {[...Array(5 - avgStars)].map((_,index) => (
+          {[...Array(5 - avgStars)].map((_, index) => (
             <FaStar color="gray" key={index} />
           ))}
           <div style={{ fontSize: "16px", marginTop: "4px", color: "gray" }}>

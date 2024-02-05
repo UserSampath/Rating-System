@@ -7,8 +7,6 @@ const Side = () => {
     <div className="sidebarContainer">
       <div style={{ marginTop: "30px" }}>
         <SidebarButton buttonType={"User"} selected={true} />
-        <SidebarButton buttonType={"Analytics"} selected={false} />
-        <SidebarButton buttonType={"Settings"} selected={false} />
       </div>
     </div>
   );
